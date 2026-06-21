@@ -1,4 +1,9 @@
 
+# Environment secrets — never commit
+.env
+.env.local
+.env.*.local
+
 # Playwright output (keep folder structure, ignore generated content)
 node_modules/
 /playwright-report/
