@@ -1,0 +1,54 @@
+# Windsurf Rules — Advanced Playwright Framework
+
+## Mandatory Quality Gates
+Run after every change before marking complete:
+```bash
+npm run typecheck                        # TypeScript — zero errors
+npm run lint                             # ESLint — zero errors
+npm run format:check                     # Prettier — all formatted
+npx playwright test --grep @smoke        # Smoke suite — all green
+```
+
+## Architecture
+- Framework: Playwright Test + TypeScript (strict)
+- Pattern: Page Object Model + Custom Fixtures
+- Reporting: Custom TTA Reporter + Allure + Playwright HTML
+- Logging: Winston (shared logger + scoped child loggers)
+
+## Required Patterns
+
+### Page Object
+```typescript
+import { BasePage } from './BasePage';
+
+export class LoginPage extends BasePage {
+  usernameInput = () => this.page.locator('#username');
+
+  async login(user: string, pass: string) {
+    await this.usernameInput().fill(user);
+  }
+}
+```
+
+### Test File
+```typescript
+import { test, expect } from '@fixtures/test-base';
+
+test('@smoke @P0 description', async ({ loginPage }) => {
+  // test body
+});
+```
+
+### Logger
+```typescript
+import { createLogger } from '@utils/logger';
+const log = createLogger('MyClass');
+log.info('message');
+```
+
+## Hard Rules
+1. Locators = arrow functions only (prevents stale elements)
+2. Every test = at least one tag
+3. No `as any` or `@ts-ignore`
+4. All quality gates must pass before committing
+5. Files go in correct `src/` subfolder only

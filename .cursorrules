@@ -1,0 +1,32 @@
+# Cursor AI Rules — Advanced Playwright Framework
+
+## Quality Gates
+Run these after EVERY code change. Do not mark a task complete until all pass:
+1. `npm run typecheck` — zero TypeScript errors
+2. `npm run lint` — zero ESLint errors
+3. `npm run format:check` — all files formatted (run `npm run format` to auto-fix)
+4. `npx playwright test --grep @smoke` — smoke suite green
+
+## Project Structure
+- Page Objects → `src/pages/` (extend BasePage)
+- Fixtures → `src/fixtures/test-base.ts`
+- Spec files → `src/tests/`
+- Test data → `src/testdata/` (JSON · CSV · XLSX · types.ts)
+- Utilities → `src/utils/` (logger, reporter, file reader, data factory)
+- Config → `src/config/` (env URLs)
+
+## Strict Rules
+- Locators MUST be arrow functions: `btn = () => this.page.locator('#id')`
+- All tests MUST have tags: `@smoke`, `@regression`, `@e2e`, `@P0`, `@P1`, or `@P2`
+- Use path aliases: `@pages/`, `@utils/`, `@fixtures/`, `@testdata/`, `@config/`
+- Use `createLogger('ClassName')` from `@utils/logger` for all logging
+- No `as any`, no `// @ts-ignore`, no inline `eslint-disable` without reason
+- Import test from `@fixtures/test-base`, not directly from `@playwright/test`
+
+## TypeScript
+- Strict mode is ON — all types must be explicit
+- `noUnusedLocals` and `noUnusedParameters` are enabled — remove unused code
+- `noImplicitReturns` is enabled — all code paths must return a value
+
+## Commit Convention
+feat: · fix: · refactor: · chore: · docs: · ci: · test:
