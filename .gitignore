@@ -1,8 +1,16 @@
 
-# Playwright
+# Playwright output (keep folder structure, ignore generated content)
 node_modules/
-/test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+/allure-results/
+/allure-report/
+/logs/
+
+# Keep folder structure but ignore generated files
+/test-results/*
+!/test-results/.gitkeep
+/tta-report/*
+!/tta-report/.gitkeep
