@@ -76,3 +76,4 @@ cp .env.example .env        # set TTA_ENV=qa
 - Use conventional commit format: `feat:`, `fix:`, `refactor:`, `chore:`, `docs:`, `ci:`
 - Never use `git push --force` on main
 - Never skip pre-commit hooks with `--no-verify`
+- **Never add `Co-Authored-By` or any Claude attribution line to commit messages**
