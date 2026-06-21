@@ -1,24 +1,56 @@
 {
   "compilerOptions": {
+    /* Language & Output */
     "target": "ES2020",
-    "module": "commonjs",
-    "lib": ["ES2020"],
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
+    "module": "CommonJS",
+    "lib": ["ES2020", "DOM"],
     "outDir": "./dist",
     "rootDir": "./",
+
+    /* Module Resolution */
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    /* Path Aliases */
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
-      "@pages/*": ["src/pages/*"],
-      "@utils/*": ["src/utils/*"],
+      "@pages/*":    ["src/pages/*"],
       "@fixtures/*": ["src/fixtures/*"],
-      "@testdata/*": ["src/testdata/*"]
-    }
+      "@utils/*":    ["src/utils/*"],
+      "@testdata/*": ["src/testdata/*"],
+      "@config/*":   ["src/config/*"]
+    },
+
+    /* Type Checking — Strict */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Interop & Safety */
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    /* Source Maps for Debugging */
+    "sourceMap": true,
+    "inlineSources": true
   },
-  "include": ["src/**/*.ts", "playwright.config.ts"],
-  "exclude": ["node_modules", "dist", "playwright-report", "test-results"]
+  "include": [
+    "src/**/*.ts",
+    "playwright.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "playwright-report",
+    "test-results",
+    "allure-results",
+    "allure-report",
+    "tta-report",
+    "logs"
+  ]
 }
