@@ -1,0 +1,55 @@
+# Cline Rules — Advanced Playwright Framework
+
+## Quality Gates
+Run these in order after EVERY code change. Do not mark a task done until all 4 pass:
+
+```bash
+npm run typecheck                        # 1. Zero TypeScript errors
+npm run lint                             # 2. Zero ESLint errors
+npm run format:check                     # 3. All files formatted (npm run format to fix)
+npx playwright test --grep @smoke        # 4. Smoke suite green
+```
+
+## Project Layout
+```
+src/pages/        → Page Object classes (one per page, extend BasePage)
+src/fixtures/     → Custom Playwright fixtures (test-base.ts)
+src/tests/        → Spec files organized by feature
+src/testdata/     → JSON · CSV · XLSX · TypeScript interfaces
+src/utils/        → logger · reporter · file reader · data factory
+src/config/       → Environment URL mapping
+rules/            → Quality gate definitions (source of truth)
+```
+
+## Code Rules
+
+### Locators — always arrow functions
+```typescript
+loginBtn = () => this.page.getByRole('button', { name: 'Login' });
+```
+
+### Tests — always tagged
+```typescript
+test('@smoke @P0 should login successfully', async ({ loginPage }) => { ... });
+```
+
+### Logger — always scoped
+```typescript
+import { createLogger } from '@utils/logger';
+const log = createLogger('LoginPage');
+```
+
+### Imports — always use path aliases
+```typescript
+import { LoginPage } from '@pages/LoginPage';
+import { test }      from '@fixtures/test-base';
+import logger        from '@utils/logger';
+```
+
+## Forbidden
+- `as any` or `// @ts-ignore` without a written reason
+- Inline `// eslint-disable` without a comment
+- Tests without tags
+- Locators as class properties (stale element risk)
+- Files outside the correct `src/` subfolder
+- Committing when typecheck / lint / format:check fails

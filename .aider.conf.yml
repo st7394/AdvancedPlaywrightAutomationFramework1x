@@ -1,0 +1,32 @@
+# Aider Configuration — Advanced Playwright Framework
+
+## Model preferences
+# Uncomment to set preferred model:
+# model: claude-sonnet-4-6
+# model: gpt-4o
+
+## Auto-commit settings
+auto-commits: false          # Always review before committing
+dirty-commits: false
+
+## Quality gate reminder (run manually after every session)
+# npm run typecheck && npm run lint && npm run format:check && npx playwright test --grep @smoke
+
+## Files Aider should always read for context
+# read: CLAUDE.md
+# read: rules/quality-gates.md
+# read: playwright.config.ts
+# read: tsconfig.json
+
+## Coding conventions (enforced by lint/typecheck)
+# - Locators must be arrow functions
+# - All tests must have tags: @smoke @regression @e2e @P0 @P1 @P2
+# - No as any or @ts-ignore
+# - Path aliases: @pages/ @fixtures/ @utils/ @testdata/ @config/
+# - Import test from @fixtures/test-base not @playwright/test
+# - Use createLogger('ClassName') from @utils/logger
+
+## Commit message format
+commit-prompt: |
+  Write a conventional commit message: feat: / fix: / refactor: / chore: / docs: / ci: / test:
+  Be concise. Describe WHY not WHAT.

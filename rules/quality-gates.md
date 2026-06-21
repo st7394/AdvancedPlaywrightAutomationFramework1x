@@ -40,9 +40,23 @@ npm run typecheck && npm run lint && npm run format:check && npx playwright test
 
 ---
 
+## AI Assistant Rule Files
+
+| Tool | File | Auto-loaded |
+|---|---|---|
+| Claude Code | `CLAUDE.md` | Yes |
+| GitHub Copilot | `.github/copilot-instructions.md` | Yes |
+| Cursor | `.cursorrules` | Yes |
+| Windsurf | `.windsurfrules` | Yes |
+| Cline | `.clinerules` | Yes |
+| Augment Code | `augment-guidelines.md` | Yes |
+| Gemini CLI | `GEMINI.md` | Yes |
+| Antigravity | `.antigravity` | Yes |
+| Aider | `.aider.conf.yml` | Yes |
+
 ## Rules for AI Agents
 
-These rules apply to Claude Code, GitHub Copilot, Cursor, Windsurf, and any other AI assistant working in this repository:
+These rules apply to all AI assistants (Claude, Copilot, Cursor, Windsurf, Cline, Augment, Gemini, Antigravity, Aider) working in this repository:
 
 1. **After every file change** — run `npm run typecheck`. Fix all type errors before proceeding.
 2. **After every file change** — run `npm run lint`. Fix all lint errors. Do not suppress rules without justification.

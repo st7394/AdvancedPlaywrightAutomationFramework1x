@@ -1,0 +1,49 @@
+# Antigravity AI Rules — Advanced Playwright Framework
+
+## Quality Gates
+Run after every code change — all must pass:
+
+```bash
+npm run typecheck                        # Zero TypeScript errors
+npm run lint                             # Zero ESLint errors
+npm run format:check                     # Prettier formatting check
+npx playwright test --grep @smoke        # Smoke suite must be green
+```
+
+## Project Structure
+- `src/pages/`     — Page Object classes (extend BasePage)
+- `src/fixtures/`  — Custom Playwright fixtures
+- `src/tests/`     — Spec files with tags
+- `src/testdata/`  — JSON · CSV · XLSX · TypeScript types
+- `src/utils/`     — Logger · Reporter · Helpers
+- `src/config/`    — Environment configuration
+
+## Patterns
+
+### Locators — arrow functions only
+```typescript
+searchInput = () => this.page.locator('[data-test="search"]');
+```
+
+### Tests — must be tagged
+```typescript
+test('@smoke @P1 Add item to cart', async ({ cartPage }) => { ... });
+```
+
+### Logger
+```typescript
+import { createLogger } from '@utils/logger';
+const log = createLogger('InventoryPage');
+```
+
+### Imports — use path aliases
+```typescript
+import { InventoryPage } from '@pages/InventoryPage';
+import { test }          from '@fixtures/test-base';
+```
+
+## Hard Rules
+- No `as any` or `// @ts-ignore`
+- No test without a tag
+- No locators as plain class properties
+- All gates pass before committing
